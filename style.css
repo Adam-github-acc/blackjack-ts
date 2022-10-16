@@ -1,0 +1,313 @@
+*{
+  cursor: default;
+  margin: 0;
+  padding: 0;
+  -webkit-user-select: none;
+  user-select: none;
+  font-family: 'Montserrat', 'Poppins', sans-serif;
+}
+:root{
+  --main-bg-color: #15803d;
+  --secondary-color: #16a34a;
+  --put-bet-bg: #166534;
+  --hover-color: #22c55e;
+}
+body{
+  background-color: var(--main-bg-color);
+  margin: 0;
+}
+.cash-total{
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 2rem;
+}
+.total-cash{
+  font-size: 3rem;
+  text-align: center;
+  width: 12rem;
+  height: 4rem;
+  background-color: var(--secondary-color);
+  padding: .25em .5em;
+  border-radius: 2.1rem;
+  border: 0px;
+}
+.put-bet,
+.winning-message{
+  display: none;
+  position: absolute;
+  left: 30vw;
+  top: 30vh;
+  width: 30rem;
+  height: 15rem;
+  justify-content: center;
+  background-color: var(--put-bet-bg);
+  border-radius: 2rem;
+  z-index: 1;
+}
+.button-container{
+  display: flex;
+  justify-content: space-evenly;
+  height: 5rem;
+}
+.play-again,
+.restart-game{
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--main-bg-color);
+  justify-content: center;
+  align-items: center;
+  color:white;
+  font-size: 5rem;
+  grid-template-rows: 2fr 1fr 1fr 2fr;
+  z-index: 1;
+}
+.play-again div,
+.restart-game div{
+  text-align: center;
+  grid-row: 2;
+}
+.play-again button,
+.restart-game button{
+  grid-row: 3;
+}
+button{
+  font-size: 3rem;
+  background-color:var(--secondary-color);
+  padding: .25em .5em;
+  border-radius: 2.1rem;
+  border: 0px;
+  text-align: center;
+}
+.hover:hover{
+  background-color: var(--hover-color);
+  cursor: pointer;
+}
+.play{
+  display: none;
+  height: 100vh;
+  width: 100vw;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 0.1fr 0.7fr 33% 30% 1fr 0.1fr;
+  position: fixed;
+  color:white;
+  font-size: 5rem;
+}
+.top-left{
+  grid-column: 2;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+.bot-left{
+  grid-column: 2;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+.bot-right{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-top: -2rem;
+}
+.btn-hit,
+.btn-stand{
+  grid-row: 2;
+  justify-content: center;
+  margin-left:2.1rem;
+  margin-right:2.1rem;
+}
+.btn-stand,
+.dealer-points,
+.dealer{
+  grid-column: 2;
+}
+.btn-hit,
+.player-points,
+.player{
+  grid-column: 5;
+}
+.show{
+  display: grid;
+}
+.player-points,
+.dealer-points{
+  justify-self: center;
+  grid-row: 4;
+  height: 6rem;
+  width: 6rem;
+  border: 0.4rem var(--secondary-color) solid;
+  border-radius: 50%;
+  text-align: center;
+  align-self: center;
+  background-color: var(--secondary-color);
+  margin: 0.5rem;
+}
+.btn-start-over{
+  width: 18rem;
+  margin: auto;
+}
+.btn-start{
+  width: 12rem;
+  margin: auto;
+}
+.bet-text,
+.end-text{
+  font-size: 4rem;
+  color: white;
+  text-align: center;
+}
+.bet-text{
+  margin-top: 1.5rem;
+}
+.end-text{
+  align-self: center;
+  font-size: 6rem;
+  z-index: 1;
+  color: yellow;
+}
+.letter-heart,
+.letter-diamond{
+  color: #de1818;
+}
+.dealer,
+.player,
+.text{
+  grid-row: 3;
+  font-size: 1.4rem;
+  text-align: center;
+}
+.playing-surface{
+  grid-column: 3 / 5;
+  grid-row: 1 / -1;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+.player-cards{
+  margin-left: 6rem;
+  position: relative;
+  grid-row: 2;
+  display: flex;
+  align-self: center;
+}
+.dealer-cards{
+  margin-left: 6rem;
+  grid-row: 1;
+  display: flex;
+  grid-auto-flow: column;
+  align-self: center;
+}
+.card{
+  display: grid;
+  margin-left: -3rem;
+  grid-template-rows: 1fr 1fr 3fr 1fr 1fr;
+  grid-template-columns: 1fr 2fr 1fr;
+  width: 11rem;
+  height: 18rem;
+  background-color: white;
+  border-radius: 1rem;
+  border: 3px rgb(182, 182, 182) solid;
+  color: black;
+  z-index: 1;
+}
+.big{
+  grid-row: 3 / -2;
+  grid-column: 1 / -1;
+  height: 6rem;
+  width: 6rem;
+  margin: auto;
+  margin-left: 30%;
+}
+.small1,
+.small2{
+  width: 2rem;
+  height: 2rem;
+  justify-self: center;
+  align-self: center;
+}
+.small1{
+  grid-row: 2;
+  grid-column: 1;
+}
+.small2{
+  grid-row: -2;
+  grid-column: -1;
+}
+.small2-cover{
+  grid-row: 5 / 7;
+  grid-column: 1 / 3 ;
+  z-index: 1;
+  background-color: white;
+  border-radius: 1rem;
+}
+.top{
+  font-size: 2rem;
+  font-weight: 900;
+  grid-row: 1;
+  grid-column: 1;
+  justify-self: center;
+  align-self: center;
+}
+.bot{
+  grid-row: -1;
+  grid-column: -1;
+  justify-self: center;
+  align-self: center;
+  font-size: 2rem;
+  font-weight: 900;
+  transform: rotate(180deg);
+}
+.hide{
+  display: none;
+}
+.constant-pile,
+.card-pile,
+.card-pile2{
+  position: absolute;
+  justify-self: center;
+  margin-top: 10%;
+  grid-row: 1;
+  grid-column: 5;
+  width: 11rem;
+  height: 18rem;
+  background: repeating-linear-gradient(
+      45deg,
+      rgb(2, 50, 228),
+      rgb(2, 60, 240) 0.7rem,
+      rgb(2, 70, 260) 0.7rem,
+      rgb(2, 86, 270) 1.4rem
+  );
+  border-radius: 1rem;
+  border: 3px rgb(182, 182, 182) solid;
+}
+.hidden-card{
+  width: 11rem;
+  height: 18rem;
+  background: repeating-linear-gradient(
+      45deg,
+      rgb(2, 50, 228),
+      rgb(2, 60, 240) 0.7rem,
+      rgb(2, 70, 260) 0.7rem,
+      rgb(2, 86, 270) 1.4rem
+  );
+  margin-top: -3px;
+  margin-left: -3px;
+  border-radius: 1rem;
+  border: 3px rgb(182, 182, 182) solid;
+  z-index: 2;
+  width: 11rem;
+  height: 18rem;
+  position: absolute;
+}
+/*For color convertor https://codepen.io/sosuke/pen/Pjoqqp*/
+.icon-heart,
+.icon-diamond{
+  filter: invert(13%) sepia(76%) saturate(4974%) hue-rotate(354deg) brightness(97%) contrast(108%);
+}
