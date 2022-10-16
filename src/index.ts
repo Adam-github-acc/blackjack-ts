@@ -1,4 +1,4 @@
-import $ from "jquery";
+
 import {CardRankValue, CardColour, Card, Deck, BetValue, AceCount} from './../types.d'
 let dealerPoints:number = 0;
 let playerPoints:number = 0;
@@ -87,7 +87,7 @@ function resetBoard(){
 };
 
 function playerDrawCard():number{
-    let playerCard:Card = deck.pop();
+    let playerCard:Card = getTopCard(deck);
     dealPlayerCard();
     $('.undone')
     .append(`<img class="big icon-${playerCard[0]}" src="./icons/${playerCard[0]}.svg">`)
@@ -102,7 +102,7 @@ function playerDrawCard():number{
     return pointLogic(playerCard);
 };
 function dealerDrawCard():number{
-    let dealerCard:Card = deck.pop();
+    let dealerCard: Card = getTopCard(deck);;
     $('.undone2')
     .append(`<img class="big icon-${dealerCard[0]}" src="./icons/${dealerCard[0]}.svg">`)
     .append(`<img class="small1 icon-${dealerCard[0]}" src="./icons/${dealerCard[0]}.svg">`)
@@ -116,7 +116,7 @@ function dealerDrawCard():number{
     return pointLogic(dealerCard);
 };
 function dealerFirstDrawCard():number{
-    let firstCard:Card = deck.pop();
+    let firstCard:Card = getTopCard(deck);
     $('.undone2')
     .append('<div class="hidden-card"></div>')
     .addClass(`${firstCard[0]} hide card`)
@@ -128,6 +128,11 @@ function dealerFirstDrawCard():number{
     .append(`<div class="bot letter-${firstCard[0]}">${firstCard[1]}</div>`);
     $('.dealer-cards').append('<div class="undone2"></div>');
     return pointLogic(firstCard);
+};
+function getTopCard (deck:Deck):Card {
+    let topCard = deck.pop();
+    if (topCard) return topCard;
+    else return ["spade", "A"]
 };
 function pointLogic (card:Card):number {
     let newCard:CardRankValue = card[1];
@@ -368,4 +373,3 @@ function updateCash(){
         start();
         enableButton();
     });
-
