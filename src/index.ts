@@ -1,11 +1,11 @@
-import {CardRankValue, CardColour, Card, Deck} from './../types.d'
+import {CardRankValue, CardColour, Card, Deck, BetValue, AceCount} from './../types.d'
 let dealerPoints:number = 0;
 let playerPoints:number = 0;
-let playerAce:number = 0;
-let dealerAce:number = 0;
+let playerAce:AceCount = 0;
+let dealerAce:AceCount = 0;
 let deck:Deck = [];
 let totalCash:number = 500;
-let bet:number = 0;
+let bet:BetValue = 0;
 let left:number = 100;
 let left2:number = 110;
 
@@ -30,9 +30,9 @@ const deckBuilder = () => {
 };
 
 const shuffleDeck = () => {
-    for(let i = deck.length - 1; i > 0; --i) {
-        const j = Math.floor(Math.random() * (i + 1));
-        const k = deck[j];
+    for(let i:number = deck.length - 1; i > 0; --i) {
+        const j:number = Math.floor(Math.random() * (i + 1));
+        const k:Card = deck[j];
         deck[j] = deck[i];
         deck[i] = k;
     };
@@ -43,7 +43,7 @@ const start = () =>{
     createOpeningTable();
     updateCash();
 };
-function betting(bets){
+function betting(bets:BetValue){
     totalCash -= bets;
     bet = bets;
 };
@@ -87,7 +87,7 @@ function resetBoard(){
 
 function playerDrawCard(){
     dealPlayerCard();
-    let playerCard = deck.pop();
+    let playerCard:Card = deck.pop();
     $('.undone')
     .append(`<img class="big icon-${playerCard[0]}" src="./icons/${playerCard[0]}.svg">`)
     .append(`<img class="small1 icon-${playerCard[0]}" src="./icons/${playerCard[0]}.svg">`)
@@ -98,9 +98,9 @@ function playerDrawCard(){
     .append(`<div class="top letter-${playerCard[0]}">${playerCard[1]}</div>`)
     .append(`<div class="bot letter-${playerCard[0]}">${playerCard[1]}</div>`);
     $('.player-cards').append('<div class="undone"></div>');
-    let card = playerCard.pop();
-    if(card > 1)return parseInt(card);
-    else if(card === "A"){
+    let newCard:CardRankValue = playerCard[1];
+    if(newCard > 1)return parseInt(newCard);
+    else if(newCard === "A"){
         playerAce += 1;
         return 11;
     }
