@@ -1,3 +1,4 @@
+import $ from "jquery";
 import {CardRankValue, CardColour, Card, Deck, BetValue, AceCount} from './../types.d'
 let dealerPoints:number = 0;
 let playerPoints:number = 0;
@@ -85,7 +86,7 @@ function resetBoard(){
     $('.dealer-cards').append('<div class="undone2"></div>');
 };
 
-function playerDrawCard(){
+function playerDrawCard():number{
     let playerCard:Card = deck.pop();
     dealPlayerCard();
     $('.undone')
@@ -98,9 +99,9 @@ function playerDrawCard(){
     .append(`<div class="top letter-${playerCard[0]}">${playerCard[1]}</div>`)
     .append(`<div class="bot letter-${playerCard[0]}">${playerCard[1]}</div>`);
     $('.player-cards').append('<div class="undone"></div>');
-    pointLogic(playerCard);
+    return pointLogic(playerCard);
 };
-function dealerDrawCard(){
+function dealerDrawCard():number{
     let dealerCard:Card = deck.pop();
     $('.undone2')
     .append(`<img class="big icon-${dealerCard[0]}" src="./icons/${dealerCard[0]}.svg">`)
@@ -112,17 +113,9 @@ function dealerDrawCard(){
     .append(`<div class="top letter-${dealerCard[0]}">${dealerCard[1]}</div>`)
     .append(`<div class="bot letter-${dealerCard[0]}">${dealerCard[1]}</div>`);
     $('.dealer-cards').append('<div class="undone2"></div>');
-    pointLogic(dealerCard);
+    return pointLogic(dealerCard);
 };
-function pointLogic (card:Card) {
-    let newCard:CardRankValue = card[1];
-    if(newCard === "A"){
-        playerAce += 1;
-        return 11;
-    } else if (newCard === "K" || newCard === "Q" || newCard === "J") return 10;
-    else return parseInt(newCard);
-};
-function dealerFirstDrawCard(){
+function dealerFirstDrawCard():number{
     let firstCard:Card = deck.pop();
     $('.undone2')
     .append('<div class="hidden-card"></div>')
@@ -134,9 +127,16 @@ function dealerFirstDrawCard(){
     .append(`<div class="top letter-${firstCard[0]}">${firstCard[1]}</div>`)
     .append(`<div class="bot letter-${firstCard[0]}">${firstCard[1]}</div>`);
     $('.dealer-cards').append('<div class="undone2"></div>');
-    pointLogic(firstCard);
+    return pointLogic(firstCard);
 };
-
+function pointLogic (card:Card):number {
+    let newCard:CardRankValue = card[1];
+    if(newCard === "A"){
+        playerAce += 1;
+        return 11;
+    } else if (newCard === "K" || newCard === "Q" || newCard === "J") return 10;
+    else return parseInt(newCard);
+};
 function hit(){
     playerPoints += playerDrawCard();
     checkPlayerAce();
@@ -305,7 +305,6 @@ function disableButton(){
 };
 
 function enableButton(){
-    $(document).ready(function(){
         $('.btn-hit').prop('disabled', false).addClass('hover');
         $('.btn-stand').prop('disabled', false).addClass('hover');
         $('.put-bet').removeClass('show');
@@ -313,10 +312,8 @@ function enableButton(){
         $('.btn-100').prop('disabled', true).removeClass('hover');
         $('.btn-50').prop('disabled', true).removeClass('hover');
         $('.play').append('<div class="winning-message"><div class="end-text"></div></div>');
-    });
 };
 
-$(document).ready(function(){
     $(".btn-start").click(function(){
         $('.play-again').removeClass('show');
         disableButton();
@@ -324,9 +321,7 @@ $(document).ready(function(){
         deckBuilder();
         $('.play').addClass('show');
     });
-});
 
-$(document).ready(function(){
     $(".btn-start-over").click(function(){
         deckBuilder();
         $('.dealer-points').text(`${dealerPoints}`);
@@ -339,9 +334,7 @@ $(document).ready(function(){
         $('.restart-game').removeClass('show');
         $('.btn-start-over').removeClass('show');
     });
-});
 
-$(document).ready(function(){
     $('.btn-hit').click(function(){
         $('.btn-hit').prop('disabled', true).removeClass('hover');
         $('.btn-stand').prop('disabled', true).removeClass('hover');
@@ -351,37 +344,28 @@ $(document).ready(function(){
         }, 300)};
         hit();
     });
-});
 
-$(document).ready(function(){
     $(".btn-stand").click(function(){
         stand();
     });
-});
 function updateCash(){
     $('.total-cash').text(`${totalCash}`);
 };
 
-$(document).ready(function(){
     $(".btn-50").click(function(){
         betting(50);
         start();
         enableButton();
     });
-});
-
-$(document).ready(function(){
     $(".btn-100").click(function(){
         betting(100);
         start();
         enableButton();
     });
-});
 
-$(document).ready(function(){
     $(".btn-200").click(function(){
         betting(200);
         start();
         enableButton();
     });
-});
+
