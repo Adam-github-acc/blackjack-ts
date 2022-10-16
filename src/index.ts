@@ -1,14 +1,21 @@
 
-let dealerPoints = 0;
-let playerPoints = 0;
-let playerAce = 0;
-let dealerAce = 0;
-let deck = [];
-let cards;
-let totalCash = 500;
-let bet = 0;
-let left = 100;
-let left2 = 110;
+let dealerPoints:number = 0;
+let playerPoints:number = 0;
+let playerAce:number = 0;
+let dealerAce:number = 0;
+let deck:Deck = [];
+let cards:number;
+let totalCash:number = 500;
+let bet:number = 0;
+let left:number = 100;
+let left2:number = 110;
+
+type CardRankValue = "A" | "2"| "3"| "4"| "5"| "6"| "7"| "8"|
+"9"| "10"| "J"| "Q"| "K";
+type CardColour = "heart"| "spade"| "diamond"| "club";
+type Card = [CardColour, CardRankValue];
+type Deck = Card[];
+
 
 const deckBuilder = () => {
     updateCash();
@@ -18,8 +25,8 @@ const deckBuilder = () => {
     dealerAce = 0;
     left = 100;
     left2 = 110;
-    let cardColour = ["heart", "spade", "diamond", "club"];
-    let cardRank =
+    let cardColour:CardColour[] = ["heart", "spade", "diamond", "club"];
+    let cardRank: CardRankValue[] =
     ["A", "2", "3", "4", "5", "6", "7", "8",
      "9", "10", "J", "Q", "K"];
     for(let i = 0; i < cardRank.length; i++){
