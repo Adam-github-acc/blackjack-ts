@@ -86,8 +86,8 @@ function resetBoard(){
 };
 
 function playerDrawCard(){
-    dealPlayerCard();
     let playerCard:Card = deck.pop();
+    dealPlayerCard();
     $('.undone')
     .append(`<img class="big icon-${playerCard[0]}" src="./icons/${playerCard[0]}.svg">`)
     .append(`<img class="small1 icon-${playerCard[0]}" src="./icons/${playerCard[0]}.svg">`)
@@ -98,16 +98,10 @@ function playerDrawCard(){
     .append(`<div class="top letter-${playerCard[0]}">${playerCard[1]}</div>`)
     .append(`<div class="bot letter-${playerCard[0]}">${playerCard[1]}</div>`);
     $('.player-cards').append('<div class="undone"></div>');
-    let newCard:CardRankValue = playerCard[1];
-    if(newCard > 1)return parseInt(newCard);
-    else if(newCard === "A"){
-        playerAce += 1;
-        return 11;
-    }
-    else return 10;
+    pointLogic(playerCard);
 };
 function dealerDrawCard(){
-    let dealerCard = deck.pop();
+    let dealerCard:Card = deck.pop();
     $('.undone2')
     .append(`<img class="big icon-${dealerCard[0]}" src="./icons/${dealerCard[0]}.svg">`)
     .append(`<img class="small1 icon-${dealerCard[0]}" src="./icons/${dealerCard[0]}.svg">`)
@@ -118,33 +112,29 @@ function dealerDrawCard(){
     .append(`<div class="top letter-${dealerCard[0]}">${dealerCard[1]}</div>`)
     .append(`<div class="bot letter-${dealerCard[0]}">${dealerCard[1]}</div>`);
     $('.dealer-cards').append('<div class="undone2"></div>');
-    let card2 = dealerCard.pop()
-    if(card2 > 1)return parseInt(card2);
-    else if(card2 === "A"){
-        dealerAce += 1;
+    pointLogic(dealerCard);
+};
+function pointLogic (card:Card) {
+    let newCard:CardRankValue = card[1];
+    if(newCard === "A"){
+        playerAce += 1;
         return 11;
-    }
-    else return 10;
+    } else if (newCard === "K" || newCard === "Q" || newCard === "J") return 10;
+    else return parseInt(newCard);
 };
 function dealerFirstDrawCard(){
-    let card = deck.pop();
+    let firstCard:Card = deck.pop();
     $('.undone2')
     .append('<div class="hidden-card"></div>')
-    .addClass(`${card[0]} hide card`)
-    .append(`<img class="big icon-${card[0]}" src="./icons/${card[0]}.svg">`)
-    .append(`<img class="small1 icon-${card[0]}" src="./icons/${card[0]}.svg">`)
-    .append(`<img class="small2 icon-${card[0]}" src="./icons/${card[0]}.svg">`)
+    .addClass(`${firstCard[0]} hide card`)
+    .append(`<img class="big icon-${firstCard[0]}" src="./icons/${firstCard[0]}.svg">`)
+    .append(`<img class="small1 icon-${firstCard[0]}" src="./icons/${firstCard[0]}.svg">`)
+    .append(`<img class="small2 icon-${firstCard[0]}" src="./icons/${firstCard[0]}.svg">`)
     .removeClass('undone2')
-    .append(`<div class="top letter-${card[0]}">${card[1]}</div>`)
-    .append(`<div class="bot letter-${card[0]}">${card[1]}</div>`);
+    .append(`<div class="top letter-${firstCard[0]}">${firstCard[1]}</div>`)
+    .append(`<div class="bot letter-${firstCard[0]}">${firstCard[1]}</div>`);
     $('.dealer-cards').append('<div class="undone2"></div>');
-    card = card.pop()
-    if(card > 1)return parseInt(card);
-    else if(card === "A"){
-        dealerAce += 1;
-        return 11;
-    }
-    else return 10;
+    pointLogic(firstCard);
 };
 
 function hit(){
