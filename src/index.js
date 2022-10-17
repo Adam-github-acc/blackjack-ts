@@ -1,5 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 let dealerPoints = 0;
 let playerPoints = 0;
 let playerAce = 0;
